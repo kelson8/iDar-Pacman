@@ -33,6 +33,17 @@ function installer.install_package(package, raw_files, session_id, is_explicit)
 
     fake_root.commit(session_id, manifest.get_directory(name))
 
+    local bin = manifest.get_bin(name)
+    for cmd, rel_path in pairs(bin) do
+        local ptr_path = "/iDar/bin/" .. cmd .. ".ptr"
+        local full_path = "/iDar/" .. manifest.get_directory(name) .. "/" .. rel_path
+        local f = io.open(ptr_path, "w")
+        if f then
+            f:write(full_path)
+            f:close()
+        end
+    end
+
     local deps = manifest.get_dependencies(name)
     local installed_version = registry.get_package_info(name)[version] or version
 
@@ -45,7 +56,8 @@ function installer.install_package(package, raw_files, session_id, is_explicit)
         installed_version,
         is_explicit,
         deps,
-        manifest.get_directory(name)
+        manifest.get_directory(name),
+        bin
     )
 
     return true
@@ -72,6 +84,14 @@ function installer.remove_package(targets)
             if fs.exists(full_path) then
                 fs.delete(full_path)
                 print("  -> deleted " .. full_path)
+            end
+
+            local bin = registry.get_installed_bin(name)
+            for cmd, _ in pairs(bin) do
+                local ptr_path = "/iDar/bin/" .. cmd .. ".ptr"
+                if fs.exists(ptr_path) then
+                    fs.delete(ptr_path)
+                end
             end
 
             registry.set_uninstalled(name)

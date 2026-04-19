@@ -77,4 +77,8 @@ function manifest.has_hook(package_name)
     return hooks and #hooks > 0
 end
 
+function manifest.get_bin(package_name)
+    return manifests[package_name].bin or {}
+end
+
 return manifest

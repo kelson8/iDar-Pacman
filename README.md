@@ -1,6 +1,6 @@
 # iDar-Pacman
 
-![State: Alpha v2.0.1](https://img.shields.io/badge/State-Alpha_v2.0.1-orange)
+![State: Alpha v2.1.0](https://img.shields.io/badge/State-Alpha_v2.1.0-orange)
 
 **The definitive package manager for ComputerCraft: Tweaked.**
 

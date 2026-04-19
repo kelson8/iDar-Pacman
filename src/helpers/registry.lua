@@ -127,14 +127,15 @@ function registry.get_installed_dir(package_name)
     return local_db[package_name].install_dir or {}
 end
 
-function registry.set_installed(name, version, is_explicit, deps, dir)
+function registry.set_installed(name, version, is_explicit, deps, dir, bin)
     ensure_loaded()
     local_db[name] = {
         installed_version = version,
         package_type = is_explicit and "explicit" or "implicit",
         dependencies = deps,
         install_dir = dir,
-        installed_at = os.epoch("utc")
+        installed_at = os.epoch("utc"),
+        bin = bin or {}
     }
     dump_local()
 end
@@ -154,6 +155,12 @@ end
 function registry.is_installed(package_name)
     ensure_loaded()
     return local_db[package_name] and true or false
+end
+
+function registry.get_installed_bin(package_name)
+    ensure_loaded()
+    if not local_db[package_name] then return {} end
+    return local_db[package_name].bin or {}
 end
 
 return registry

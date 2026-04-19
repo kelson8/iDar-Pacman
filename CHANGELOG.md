@@ -77,3 +77,19 @@ This patch addresses critical bugs found in the v2.0.0 release related to reposi
 - Added `registry.get_all_packages_sync()` to the Registry API to expose remote package data explicitly.
 - Updated `core.search()` to utilize the new synchronous DB accessor.
 - Replaced `flatten_file_structure` with `flatten_paths` in the Manifest helper to support mixed key-value and array-based file definitions.
+
+### v2.1.0
+
+**"The System Integration Update"**
+
+This release deeply integrates iDar-Pacman with the iDar Shell ecosystem by automating how executables and system commands are handled during installation.
+
+#### Core System & Architecture
+
+- **SATDv2.5 Support (`bin` Table):** Packages can now declare executable entry points via the optional `bin` table within their `manifest.lua`.
+- **Automated Executable Linking:** The installer simulates Arch Linux's `/usr/bin/` behavior. It now automatically generates `.ptr` files (symlinks) inside `/iDar/bin/` that point directly to the newly installed package scripts, making them immediately available as commands in the iDar Shell.
+- **Registry Persistence Update:** The local registry (`/iDar/var/local.lua`) has been upgraded to track and persist the `bin` mappings of installed packages locally, eliminating the need to re-download manifests during uninstallation.
+
+#### Cleanup & Maintenance
+
+- **Smart Dead-link Purge:** The removal process (`pacman -R` and `-Rns`) has been overhauled to read the local registry and automatically delete the associated `.ptr` files from `/iDar/bin/`. This guarantees a completely clean filesystem with no orphaned or dead commands left behind.

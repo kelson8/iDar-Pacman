@@ -10,10 +10,11 @@
 
 | SATD Version | iDar-Pacman Version | Status         |
 | ------------ | ------------------- | -------------- |
-| SATD v2.x    | v2.0.0+             | **Current**    |
+| SATD v2.5.x  | v2.1.0+             | **Current**    |
+| SATD v2.x    | v2.0.0+             | Stable         |
 | SATD v1.x    | v1.x.x              | **Deprecated** |
 
-> ⚠️ **SATD v1 is no longer supported.** All new packages must use SATD v2.
+> ⚠️ **SATD v1 is no longer supported.** All new packages must use SATD v2+.
 
 ## Core Concepts
 
@@ -130,6 +131,31 @@ return {
     }
 }
 ```
+
+### `bin` (Optional) — SATDv2.5+
+
+Declares executable entry points for the package. Pacman will automatically
+create `.ptr` files in `/iDar/bin/` pointing to the specified scripts.
+
+```lua
+bin = {
+    ["command-name"] = "relative/path/from/directory/to/script.lua"
+}
+```
+
+**Example:**
+
+```lua
+bin = {
+    ["vi"]  = "src/shell_programs/vi.lua",
+    ["cat"] = "src/shell_programs/cat.lua",
+}
+```
+
+These entries are managed by Pacman — on install, the `.ptr` files are created
+automatically. On removal, they are cleaned up alongside the package directory.
+
+> Note: Paths are relative to the package `directory`, not the repo root.
 
 ### Sandboxing Rules
 
