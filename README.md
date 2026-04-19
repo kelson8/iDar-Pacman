@@ -4,6 +4,9 @@
 
 **The definitive package manager for ComputerCraft: Tweaked.**
 
+I did not create this, all credit goes to DarThunder on GitHub
+* https://github.com/DarThunder/iDar-Pacman
+
 > _"I use Arch btw... and now my turtles do too."_
 
 **iDar-Pacman** brings the power, aesthetics, and logic of Arch Linux's `pacman` to CC: Tweaked. Unlike simple download scripts, iDar-Pacman is a fully-featured package manager capable of **resolving complex dependency trees**, managing versioning, and handling system updates intelligently.
