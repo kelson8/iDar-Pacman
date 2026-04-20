@@ -40,7 +40,7 @@ It serves as the backbone of the **iDar Ecosystem**, ensuring that libraries lik
 To bootstrap **iDar-Pacman** on your computer or turtle, run the following command:
 
 ```lua
-wget run https://raw.githubusercontent.com/DarThunder/iDar-Pacman/refs/heads/main/installer.lua
+wget run https://raw.githubusercontent.com/kelson8/iDar-Pacman/refs/heads/main/installer.lua
 ```
 
 _Note: This will install the base system and create the necessary directory structures._
@@ -120,8 +120,6 @@ return {
 }
 ```
 
-To get your package added to the global registry, submit a Pull Request to the **[iDar-Pacman-DB](https://github.com/DarThunder/iDar-Pacman-DB)** repository.
-
 ## FAQ
 
 **Q: Can I install `npm` packages with this?**
@@ -137,6 +135,8 @@ A: A man can dream. For now, the official repository is the only source of truth
 A: Because managing 6 different libraries with manual `wget` commands is a nightmare. iDar-Pacman handles the dependency hell so you don't have to.
 
 ## Current Packages in Ecosystem
+
+These packages are from DarThunder, I don't have any custom ones just yet.
 
 - [iDar-BigNum](https://github.com/DarThunder/iDar-BigNum) - Arbitrary precision arithmetic Library
 - [iDar-CryptoLib](https://github.com/DarThunder/iDar-CryptoLib) - Cryptographic suite
